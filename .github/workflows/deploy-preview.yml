@@ -37,7 +37,7 @@ jobs:
         with:
           repository: ${{ env.SOURCE_REPOSITORY }}
           ref: ${{ env.SOURCE_REF }}
-          path: site
+          path: source
           fetch-depth: 1
           persist-credentials: false
 
@@ -48,7 +48,7 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
         run: |
           set -euo pipefail
-          source_sha="$(git -C site rev-parse HEAD)"
+          source_sha="$(git -C source rev-parse HEAD)"
           should_deploy=true
 
           if [[ "${EVENT_NAME}" == "schedule" ]]; then
@@ -62,8 +62,16 @@ jobs:
           fi
 
           echo "should_deploy=${should_deploy}" >> "${GITHUB_OUTPUT}"
-          rm -rf site/.git site/.github
-          rm -f site/.gitignore
+
+          rm -rf site
+          mkdir site
+          cp source/index.html site/
+          cp -a source/assets site/
+          cp -a source/character site/
+          cp -a source/games site/
+          if [[ -f source/404.html ]]; then
+            cp source/404.html site/
+          fi
           touch site/.nojekyll
           cat > site/preview-source.json <<EOF
           {
