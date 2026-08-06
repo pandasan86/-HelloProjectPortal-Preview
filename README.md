@@ -9,7 +9,8 @@ https://pandasan86.github.io/-HelloProjectPortal-Preview/
 ## 現在の公開元
 
 - 本体リポジトリ: `pandasan86/HelloProjectPortal`
-- 対象ブランチ: `feature/20260806_portal-mock-design-alignment`
+- 対象ブランチ: `feature/20260806_blog-kentei-resume-exit`
+- 現在の確認内容: 昨日のブログ検定の途中保存・再開、途中離脱確認
 - サイト実装の正しいソース: 本体リポジトリの対象featureブランチ
 - このリポジトリ: Pagesワークフローと更新トリガーだけを管理する公開先
 
@@ -45,8 +46,8 @@ GitHub Actionsが本体featureブランチを取得し、次の公開用ファ�
 
 1. 本体featureブランチへ実装・修正する
 2. プレビューURLで確認する
-3. Codexのローカルテストと利用者の実機確認を完了する
-4. 確認済みfeatureブランチを本体リポジトリの `main` へマージする
+3. 自動テスト、ブラウザ検証、利用者の実機確認を完了する
+4. 確認済みfeatureブランチを本体リポジトリの `main` へfast-forwardする
 5. `main` のGitHub Pages本番URLを確認する
 
 プレビュー確認済みの同じコミットを `main` へ取り込むため、本番用ファイルの再作成や手作業コピーは行いません。
