@@ -2,8 +2,6 @@ name: Deploy HelloProjectPortal preview
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '55 21 6 8 *'
   push:
     branches:
       - main
