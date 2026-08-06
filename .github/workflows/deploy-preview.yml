@@ -22,7 +22,7 @@ concurrency:
 
 env:
   SOURCE_REPOSITORY: pandasan86/HelloProjectPortal
-  SOURCE_REF: feature/20260806_portal-mock-design-alignment
+  SOURCE_REF: feature/20260806_blog-kentei-resume-exit
   PREVIEW_METADATA_URL: https://pandasan86.github.io/-HelloProjectPortal-Preview/preview-source.json
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
