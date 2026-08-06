@@ -9,7 +9,7 @@ https://pandasan86.github.io/-HelloProjectPortal-Preview/
 ## 現在の公開元
 
 - 本体リポジトリ: `pandasan86/HelloProjectPortal`
-- 対象ブランチ: `feature/20260805_blog-kentei-top-ui`
+- 対象ブランチ: `feature/20260806_portal-mock-design-alignment`
 - サイト実装の正しいソース: 本体リポジトリの対象featureブランチ
 - このリポジトリ: Pagesワークフローと更新トリガーだけを管理する公開先
 
