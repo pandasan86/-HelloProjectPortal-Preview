@@ -1,0 +1,41 @@
+name: Temporary preview source switch
+
+on:
+  push:
+    branches: [main]
+    paths: ['.tmp/switch-source-ready']
+
+permissions:
+  contents: write
+
+jobs:
+  switch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Switch SOURCE_REF and refresh preview
+        shell: python
+        run: |
+          from pathlib import Path
+          from datetime import datetime, timezone
+
+          path = Path('.github/workflows/deploy-preview.yml')
+          text = path.read_text(encoding='utf-8')
+          old = 'SOURCE_REF: main'
+          new = 'SOURCE_REF: feature/20260808_app-icons-pwa'
+          if text.count(old) != 1:
+              raise SystemExit(f'expected exactly one {old!r}, found {text.count(old)}')
+          path.write_text(text.replace(old, new, 1), encoding='utf-8')
+          Path('refresh.json').write_text('{"refreshedAt":"' + datetime.now(timezone.utc).isoformat() + '"}\n', encoding='utf-8')
+          Path('.tmp/switch-source-ready').unlink(missing_ok=True)
+          Path('.github/workflows/switch-source-temp.yml').unlink(missing_ok=True)
+      - name: Commit switch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git diff --cached --check
+          git commit -m 'PreviewをPWAアイコンfeatureへ切替'
+          git push origin HEAD:main
