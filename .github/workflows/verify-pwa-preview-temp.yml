@@ -90,9 +90,12 @@ jobs:
               pages[f'games/blog-kentei/{group}/index.html'] = ('../manifest.webmanifest', 'blog-kentei')
           for path, (manifest_href, kind) in pages.items():
               text = get(path).decode('utf-8')
-              assert f'rel="manifest" href="{manifest_href}"' in text, path
+              manifest_pattern = rf'<link\s+[^>]*rel="manifest"[^>]*href="{re.escape(manifest_href)}"[^>]*>'
+              assert re.search(manifest_pattern, text, re.I), path
               expected_apple = 'character/10_master/icons/app-icons/' if path == 'index.html' else '../character/10_master/icons/app-icons/' if path == 'games/index.html' else '../../character/10_master/icons/app-icons/' if path in ('games/profile-quiz/index.html','games/blog-kentei/index.html') else '../../../character/10_master/icons/app-icons/'
-              assert f'rel="apple-touch-icon" href="{expected_apple}hello-project-portal_app-icon_{kind}_180_v1.png"' in text, path
+              apple_href = expected_apple + f'hello-project-portal_app-icon_{kind}_180_v1.png'
+              apple_pattern = rf'<link\s+[^>]*rel="apple-touch-icon"[^>]*href="{re.escape(apple_href)}"[^>]*>'
+              assert re.search(apple_pattern, text, re.I), path
 
           print('PWA_PREVIEW_VALIDATION_OK')
           print('source_sha=' + expected_sha)
