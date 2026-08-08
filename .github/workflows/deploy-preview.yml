@@ -67,6 +67,9 @@ jobs:
           cp -a source/assets site/
           cp -a source/character site/
           cp -a source/games site/
+          if [[ -f source/manifest.webmanifest ]]; then
+            cp source/manifest.webmanifest site/
+          fi
           if [[ -f source/404.html ]]; then
             cp source/404.html site/
           fi
