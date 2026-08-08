@@ -20,7 +20,7 @@ concurrency:
 
 env:
   SOURCE_REPOSITORY: pandasan86/HelloProjectPortal
-  SOURCE_REF: feature/20260808_app-icons-pwa
+  SOURCE_REF: main
   PREVIEW_METADATA_URL: https://pandasan86.github.io/-HelloProjectPortal-Preview/preview-source.json
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
