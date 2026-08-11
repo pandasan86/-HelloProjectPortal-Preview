@@ -37,8 +37,10 @@ jobs:
           set -euo pipefail
           rm -rf site
           mkdir site
-          cp index.html site/index.html
           cp 404.html site/404.html
+          if [ -f index.html ]; then
+            cp index.html site/index.html
+          fi
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v6
